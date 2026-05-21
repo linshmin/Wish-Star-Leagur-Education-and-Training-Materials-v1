@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>蓓姿媞 · 希望之星團隊 | 完整教育訓練 · 極簡閱讀版</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', 'Segoe UI', 'Noto Sans TC', system-ui, sans-serif;
+            background: #f5fbf9;
+            color: #1a3a3a;
+            line-height: 1.65;
+            scroll-behavior: smooth;
+        }
+        :root {
+            --primary-teal: #1f7b6e;
+            --primary-dark: #0e5a4f;
+            --bg-soft: #eef7f4;
+            --card-white: #ffffff;
+            --border-light: #d4eae5;
+            --accent-blue: #368fb5;
+            --shadow-sm: 0 10px 25px -12px rgba(0, 50, 40, 0.08);
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+        .nav-wrapper {
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1rem 0;
+        }
+        .nav-link {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1a5a4f;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .nav-link:hover { background: var(--bg-soft); color: var(--primary-teal); }
+        .hero {
+            background: linear-gradient(125deg, #e4f3ef 0%, #ffffff 80%);
+            border-radius: 48px;
+            margin: 2rem 0 2.5rem;
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .hero-text h1 { font-size: 3.2rem; font-weight: 800; color: var(--primary-dark); letter-spacing: -0.01em; }
+        .hero-badge { background: #cbe9e2; color: var(--primary-teal); display: inline-block; padding: 0.25rem 1rem; border-radius: 40px; font-weight: 700; margin-bottom: 1rem; }
+        .module-accordion {
+            background: var(--card-white);
+            border-radius: 32px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        .module-header {
+            background: #fefefe;
+            padding: 1.2rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #d4f0ea;
+        }
+        .module-header h2 { font-size: 1.7rem; font-weight: 700; color: var(--primary-teal); }
+        .toggle-icon { font-size: 1.8rem; color: var(--primary-teal); }
+        .module-body { padding: 2rem 2rem 2.2rem; display: block; background: #ffffff; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; margin: 1.5rem 0; }
+        .info-card { background: #fdfefe; border-radius: 28px; padding: 1.6rem; border: 1px solid #dcf0eb; height: 100%; }
+        .card-title { font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1.2rem; border-left: 5px solid var(--accent-blue); padding-left: 1rem; }
+        .notes-card { background: #f6fcf9; border-left: 4px solid var(--primary-teal); padding: 1rem 1.4rem; border-radius: 20px; margin: 1rem 0; }
+        .bullet-list { list-style: none; margin: 0.8rem 0; padding: 0; }
+        .bullet-list li { margin-bottom: 0.7rem; padding-left: 1.5rem; position: relative; line-height: 1.55; }
+        .bullet-list li::before { content: "•"; position: absolute; left: 0; color: var(--accent-blue); font-weight: bold; }
+        .insight-block { background: #eef4f2; padding: 1rem 1.4rem; border-radius: 20px; margin: 1.2rem 0; }
+        .sop-table-wrapper { overflow-x: auto; margin: 1.5rem 0; }
+        .sop-table { width: 100%; border-collapse: collapse; background: white; border-radius: 24px; }
+        .sop-table th, .sop-table td { border: 1px solid #cde3de; padding: 12px 14px; vertical-align: top; text-align: left; }
+        .sop-table th { background: #e6f4f0; font-weight: 700; color: #0e5a4f; }
+        .seven-item { background: #ffffff; border-radius: 24px; border: 1px solid #cde7e2; margin-bottom: 1rem; }
+        .seven-header { background: #ecf9f5; padding: 0.9rem 1.5rem; cursor: pointer; display: flex; justify-content: space-between; font-weight: 700; font-size: 1.05rem; color: var(--primary-dark); }
+        .seven-detail { display: none; padding: 1.2rem 1.5rem; border-top: 1px solid #d4eae5; }
+        .structure-box, .example-box { padding: 0.9rem; border-radius: 20px; margin-bottom: 1rem; }
+        .structure-box { background: #f1f9f6; }
+        .example-box { background: #ffffff; border: 1px solid #cee6df; }
+        .footer { text-align: center; padding: 2rem; margin-top: 2.5rem; border-top: 1px solid var(--border-light); color: #5e8b82; }
+        .feedback-card { background: #fafefc; border-radius: 24px; padding: 1.2rem 1.8rem; margin: 1rem 0; border: 1px solid #c8e0da; }
+        .checkbox-group { margin: 1rem 0; }
+        .checkbox-item { display: block; margin-bottom: 0.6rem; line-height: 1.5; }
+        .checkbox-item input { margin-right: 0.6rem; transform: scale(1.05); accent-color: var(--primary-teal); }
+        .section-subtitle { font-weight: 700; margin: 0.8rem 0 0.5rem; color: var(--primary-dark); font-size: 1rem; }
+        @media (max-width: 700px) {
+            .container { padding: 0 1rem; }
+            .module-header h2 { font-size: 1.3rem; }
+            .hero-text h1 { font-size: 2rem; }
+            .card-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="nav-links">
+            <span class="nav-link" data-target="module1">🌱 心態建設</span>
+            <span class="nav-link" data-target="module2">📋 基礎起步</span>
+            <span class="nav-link" data-target="module3">⚡ 核心能力</span>
+            <span class="nav-link" data-target="module4">🏡 家庭聚會SOP</span>
+            <span class="nav-link" data-target="module5">🤝 組織運作</span>
+            <span class="nav-link" data-target="module6">📌 實戰作業</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="hero">
+        <div class="hero-text">
+            <div class="hero-badge">蓓姿媞 × 希望之星團隊</div>
+            <h1>教育訓練教材<br>完整學習型網站</h1>
+            <p style="margin-top:0.8rem; color:#3e6e62;"><strong>試賣 → 代理 → 區代 → 總代</strong><br>「代理」為公司正式認定之代理商起始職級，此後依業績與人力逐步晉升區代、總代</p>
+        </div>
+        <div style="background: #daf0ea; border-radius: 48px; padding: 1rem 2rem; text-align: center;"><span style="font-size: 3rem;">🧥🧦🛡️</span><br>護椎體雕衣 · 抗菌生活</div>
+    </div>
+
+    <!-- 模組1：心態建設與自我定位 -->
+    <div id="module1" class="module-accordion">
+        <div class="module-header"><h2>📖 第一階段：心態建設與自我定位</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <div class="card-grid">
+                <div class="info-card"><div class="card-title">✨ 認識蓓姿媞事業</div><div class="notes-card"><p>✔ 改變自己對人的態度，打破對人的看法</p><p>✔ 自然界的本能——傳承：好的理念往下傳</p><p>✔ 付出 = 報酬（付出對了）造「勢」→ 環境，努力放在對的地方</p><p>✔ 跟著團體，融入團體，環境的形成</p><p>✔ 自由不受限的行業，但需要自律</p></div></div>
+                <div class="info-card"><div class="card-title">💡 事業經營正確的觀念與態度</div><div class="notes-card"><p>✔ 改變、不斷的學習 + 行動力</p><p>✔ 可以跟多少人共同創業</p><p>✔ 愛：打從內心付出　善：打從內心發出</p><p>✔ 複製成功的方法和態度</p></div></div>
+                <div class="info-card"><div class="card-title">🌟 相信的力量</div><div class="notes-card"><p>✔ 讓挫折變少</p><p>✔ 啟動對方要做的決心</p><p>✔ 不做三等公民，等老公，等小孩，等連續劇</p></div></div>
+            </div>
+            <div class="info-card"><div class="card-title">📖 我與蓓姿媞的故事（自我剖析作業）</div><ul class="bullet-list"><li>我為什麼喜歡使用蓓姿媞護椎體雕衣與抗菌系列產品？</li><li>我喜歡蓓姿媞事業的原因是什麼？</li><li>我有哪些能力可以把蓓姿媞事業做好？</li><li>我想在蓓姿媞事業得到或學到什麼？</li><li>我的人生夢想、理想與目標是什麼？</li></ul></div>
+        </div>
+    </div>
+
+    <!-- 模組2：基礎起步與名單開發 -->
+    <div id="module2" class="module-accordion">
+        <div class="module-header"><h2>📋 第二階段：基礎起步與名單開發</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <div class="card-grid">
+                <div class="info-card"><div class="card-title">📝 如何列名單</div><p>列名單是一切行動的開始，是成功的開端</p><div class="insight-block"><strong>基本原則：</strong><br>• 問自己想在蓓姿媞事業賺多少錢<br>• 拿掉心裡的不可能<br>• 主動請主管陪同列名單<br>• 量大是致勝關鍵<br>• 隨時跟主管討論名單中推薦的優先順序</div><div class="insight-block"><strong>列名單的技巧：</strong><br>• 名單中先把自己列到第一位<br>• 瞭解公司代理方式<br>• 穿著正式列名單<br>• 以脊椎保護需求性列名單<br>• 以護椎體雕衣功能性列名單<br>• 以商機發展性列名單<br><br>1. 緣故法名單：六親<br>2. 擴散法名單：由近而遠，由上而下<br>3. 陌開法名單：有關係找關係，沒關係強迫發生關係</div></div>
+                <div class="info-card"><div class="card-title">🎯 開發對象的順序</div><ul class="bullet-list"><li>百分之百信任自己的人</li><li>立即有脊椎保護需求者</li><li>良好的體態保養觀念者</li><li>捨得消費的人</li><li>有業務或經營事業經驗的人</li></ul></div>
+                <div class="info-card"><div class="card-title">📞 蓓姿媞事業經營的作業流程</div><ul class="bullet-list"><li>40個新朋友名單</li><li>電話問候2～4次</li><li>約見面（一對一或進公司）</li><li>分ABC級（推薦人陪同）</li><li>分流跟進：成為消費者 → 做好售後服務；成為試賣夥伴 → 帶入「公司講座」；尚在評估 → 邀約參加公司講座或周年慶活動</li><li>活動後繼續跟進：成為忠實愛用者 → 帶進公司或家庭聚會；晉升代理 → 進公司，教複製；成為消費者 → 做好售後服務</li></ul></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模組3：核心能力與實戰技巧（含7個三分鐘） -->
+    <div id="module3" class="module-accordion">
+        <div class="module-header"><h2>⚡ 第三階段：核心能力 · 3S · 7個三分鐘演練</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <div class="card-grid">
+                <div class="info-card"><div class="card-title">🧠 經營蓓姿媞事業應具備的能力</div><p>能力 = 性格 { ① 智能、學經歷、知識　② 情緒控制力　③ 表情、眼神、態度 }</p><p><strong>自我介紹：述說自己動人的故事</strong><br>成長的故事、接觸蓓姿媞產品的過程、找到事業的動機、找到人生的價值、經營自己的人生、接觸正面能量（感受）。影響力、感染力。</p><p>分享的技巧：怎麼分享見證。銷售動態的描述能力，帶動組織的能力。</p></div>
+                <div class="info-card"><div class="card-title">🔥 啟動事業的關鍵 3S (Share, Service, Sponsor)</div><p>世界上所有事業的基礎</p><p><strong>銷售：</strong>保護脊椎，雕塑體態 → 產品分享並獲得利潤，代理商也是代言人</p><p><strong>分享：</strong>開創事業，脫離貧窮，適當備貨，不是囤貨</p><p><strong>服務：</strong>開口就有機會，不削價競爭，共同維護市場</p><p><strong>分享心法：</strong>傾耳 + 同理心</p><p><strong>銷售七步驟：</strong></p><ul class="bullet-list"><li>1.親身穿著使用</li><li>2.體驗產品的功效</li><li>3.了解產品特色</li><li>4.同業產品的比較</li><li>5.蒐集客戶的資料</li><li>6.分析客戶的需求</li><li>7.適時切入的締結</li><li>8.積極跟進的服務（服務與跟進 1.4.7 原則）</li><li>9.異議問題的處理</li><li>10.爭取重複的銷售</li></ul><p><strong>組織運作能倍增：</strong>人、才、時間、市場、收入。人脈 = 商機 = 錢脈。集合眾人的力量來完成你／我的夢想，叫做行銷。</p></div>
+            </div>
+            <div class="info-card"><div class="card-title">📈 培育夥伴晉升</div><p>學習最大的關鍵是「改變」</p><p><strong>成功學由哪些組合成：</strong></p><ul class="bullet-list"><li>① 個人學習能力(7個三分鐘)：自我介紹、產品、代理制度、公司、開箱話術、見證分享、事業分享</li><li>② 個人開發能力：取得他對你的信賴、把真誠拿出來、看出對方的需求，願意信賴</li><li>③ 運作能力：家庭聚會、進公司、公司課程（基礎班、儲備幹部班）</li></ul><p>行動指南：找到自己的動機、目標，進行「佈局」，修正調整自己的人脈，做對事</p></div>
+            <div class="seven-grid">
+                <div class="seven-item"><div class="seven-header"><span>📌 ① 自我介紹</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>我是誰(姓名/背景) → 認識蓓姿媞之前的身體或生活狀態 → 如何接觸到蓓姿媞 → 接觸後的改變 → 為什麼我現在認真經營。</div><div class="example-box"><strong>💬 範例：</strong>「大家好，我是OO。以前我是個上班族，長期久坐腰痠背痛。透過朋友介紹穿了護椎體雕衣，身體變得輕鬆。現在我全職投入，因為這是一個照顧自己也照顧別人的事業。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>🧥 ② 產品 (護椎體雕衣)</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>產品名稱與核心功能 → 誰最需要 → 親身感受 → 前後對比 → 一句總結。</div><div class="example-box"><strong>💬 範例：</strong>「我要分享的是護椎體雕衣。它不是束腹，而是幫助脊椎回到正確位置。適合久坐、彎腰工作的人。我第一次穿的時候彎腰洗頭明顯不同，腰不再空空的。簡單說：它不是綁你，是提醒你的身體。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>📊 ③ 代理制度</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>職級簡介(試賣→代理→區代→總代) → 如何開始 → 收入來源 → 優勢。</div><div class="example-box"><strong>💬 範例：</strong>「我們的職級很簡單：試賣、代理、區代、總代。從試賣就能開始，不用一次進大量貨。收入來自產品利潤+組織獎金。最棒的是不需要說服朋友，只需要分享真實感受。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>🏢 ④ 公司(蓓姿媞)</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>品牌定位 → 理念 → 產品特色 → 信任原因。</div><div class="example-box"><strong>💬 範例：</strong>「蓓姿媞專注在護脊椎與抗菌生活。公司不是追求快時尚，而是真正解決現代人的身體問題。每一項產品都有專利或特殊材質。我之所以敢推薦，是因為我自己和家人都在用。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>📦 ⑤ 開箱話術</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>拿到產品的感受 → 試穿動作 → 身體反應 → 邀請體驗。</div><div class="example-box"><strong>💬 範例：</strong>「來，我剛剛收到這件護椎體雕衣。摸起來很透氣，不會硬硬的。我現在穿上，背部被輕輕撐住，不是緊。你摸摸看我背部，是不是變挺了？要不要你也試穿看看，只要30秒你就知道差別。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>🗣️ ⑥ 見證分享</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>過去困擾 → 為何嘗試 → 使用後改變 → 最有感故事 → 總結。</div><div class="example-box"><strong>💬 範例：</strong>「我以前只要坐辦公室到下午，腰就酸到要用手撐。朋友給我護椎體雕衣，我半信半疑穿了一週。第三天開始，下班後我竟然忘了腰的存在。它不是仙丹，但它是讓我身體回來的工具。」</div></div></div>
+                <div class="seven-item"><div class="seven-header"><span>🚀 ⑦ 事業分享</span><span class="seven-arrow">▼</span></div><div class="seven-detail"><div class="structure-box"><strong>📐 結構：</strong>為何從使用者變成經營者 → 事業意義 → 具體收穫 → 邀請嘗試。</div><div class="example-box"><strong>💬 範例：</strong>「我一開始只是買產品給自己。後來朋友問我怎麼變挺了，我只是分享，就賣出第一件。我發現原來不用推銷，只要活出改變。這事業給我的不是只有收入，而是重新掌握人生的感覺。」</div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模組4：家庭聚會運作SOP（完整文字全數恢復） -->
+    <div id="module4" class="module-accordion">
+        <div class="module-header"><h2>🏡 第四階段：家庭聚會運作SOP</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <p><strong>本 SOP 適用產品：</strong>護椎體雕衣、防駝衣、護頸、護腕、護腰、護膝、眼罩、抗菌內衣、抗菌內褲、抗菌襪品、抗菌口罩</p>
+            <p><strong>聚會時長：90分鐘</strong>　<strong>核心精神：</strong>體驗 > 說明，身體 > 話術，跟進 > 成交</p>
+            
+            <!-- 一、會前會 -->
+            <div class="info-card"><div class="card-title">一、會前會（聚會前 1-2 天）</div>
+                <p><strong>目的：</strong>確認目標、分工、流程、出席名單，排除潛在問題（如夥伴帶人來卻無共識）。</p>
+                <div class="insight-block"><strong>來賓背景調查（邀約時輕鬆詢問）：</strong><br>• 你哪裡最常不舒服？（脖子／腰／手腕／膝蓋／其他）→ 準備對應產品<br>• 你工作是久坐還是久站？ → 推薦護椎體雕衣或護腰<br>• 你會有腳臭或流腳汗的困擾嗎？ → 推薦抗菌襪<br>• 你戴口罩會覺得悶嗎？ → 推薦抗菌口罩</div>
+                <div class="insight-block"><strong>產品準備清單：</strong><br>脊椎核心：護椎體雕衣、防駝衣各2-3件（不同尺寸）<br>局部護具：護頸、護腕、護腰、護膝各1-2組<br>抗菌生活：抗菌內衣、內褲、襪品、口罩、眼罩各2-3件（展示用）<br>必備道具：全身鏡、乾淨罩衫、抗菌濕紙巾各1</div>
+                <p><strong>角色分工確認：</strong>主持人1人、主講人1人、見證人1人、夥伴2-3人協助試穿。</p>
+                <p><strong>場地動線：</strong>座位U形或圓形（避免教室型壓力），體驗區全身鏡前可站立彎腰轉身的空間，展示區分三類擺放（脊椎／局部／抗菌），茶水點心區門口或角落。</p>
+                <p><strong>設定本次家庭聚會的具體目標：</strong>例：蒐集5個有效名單、3人報名公司講座、現場賣出2組體驗包。</p>
+            </div>
+
+            <!-- 二、聚會中流程總表 -->
+            <div class="sop-table-wrapper"><table class="sop-table"><thead><tr><th>時間</th><th>環節</th><th>負責人</th><th>關鍵動作</th></tr></thead><tbody>
+                <tr><td>0-10分</td><td>迎賓＋破冰</td><td>主持人</td><td>輕音樂、遞茶水、破冰問「哪裡不舒服」</td></tr>
+                <tr><td>10-15分</td><td>正式開場</td><td>主持人</td><td>說明三大原則（非診所、非直銷大會、相信身體）</td></tr>
+                <tr><td>15-30分</td><td>身體前測</td><td>主講人</td><td>集體做4個動作：站、彎腰、轉頭、轉手腕＋微蹲</td></tr>
+                <tr><td>30-45分</td><td>核心體驗</td><td>主講人+夥伴</td><td>示範護椎體雕衣＋局部護具（護腕／護膝）</td></tr>
+                <tr><td>45-55分</td><td>見證分享</td><td>見證人</td><td>4分鐘真實故事（脊椎＋抗菌）</td></tr>
+                <tr><td>55-70分</td><td>事業＋產品總結</td><td>主講人</td><td>一句話核心＋兩種參與方式＋一週體驗邀請</td></tr>
+                <tr><td>70-80分</td><td>開放體驗與問答</td><td>全體夥伴</td><td>自由試穿試戴，一對一陪伴</td></tr>
+                <tr><td>80-90分</td><td>會後引導＋回收</td><td>主持人</td><td>發回饋卡、預告一週體驗、自由交流</td></tr>
+            </tbody></table></div>
+
+            <!-- 三、90分鐘完整逐字稿（重點摘要） -->
+            <div class="info-card"><div class="card-title">🎤 90分鐘完整逐字稿重點</div>
+                <p><strong>迎賓＋破冰（主持人）：</strong>「歡迎大家來到ＯＯ的客廳。正式開始前，先跟旁邊的朋友說一句話：『你好，我今天身體最不舒服的地方是______。』先跟大家約定三件事：第一，這裡不是診所，我們不說你生病。第二，不是直銷大會，沒人會逼你買。第三，你不需要相信我說的話，只需要相信你身體的感覺。」</p>
+                <p><strong>身體前測（主講人）：</strong>「先問一個問題：你上一次完全沒有不舒服，是什麼時候？請大家站起來，做四個動作：1.自然站立閉眼3秒；2.慢慢彎腰；3.頭左右轉；4.轉手腕、微蹲。記住剛剛最有感覺的位置，等一下穿上東西再做一次，你可能會嚇一跳。」</p>
+                <p><strong>核心體驗：</strong>挑選志願者穿上護椎體雕衣，再次做彎腰動作。「大家看她的背是不是更直了？腰的弧線變順了。這就是護椎體雕衣——不是綁緊你，是提醒脊椎『回來喔』。」同時示範護腕、護膝。最後介紹抗菌系列：「這雙襪子讓細菌不容易滋生，很多人說穿一整天脫下來沒味道。口罩也是抗菌＋透氣，久戴不悶。」</p>
+                <p><strong>見證分享：</strong>真實故事分享（上班盯電腦脖子手腕痛、腳汗異味，使用後改善）。</p>
+                <p><strong>事業＋產品總結：</strong>「剛剛所有產品，核心只有一句話：『它幫你的身體回到該有的位置，同時遠離不該有的細菌。』怎麼擁有？第一，自己用。第二，分享出去。不用囤貨、不用說服。」</p>
+                <p><strong>會後引導：</strong>填寫身體感受回饋卡，不用當場決定買不買，想多了解的可以留下來喝茶。</p>
+            </div>
+
+            <!-- 四、會後會操作流程 -->
+            <div class="info-card"><div class="card-title">📄 會後會操作流程（聚會結束後15分鐘）</div>
+                <p><strong>步驟1 快速檢討：</strong>每人30秒分享今天最成功的一件事＋一個可改進點。</p>
+                <p><strong>步驟2 鎖定潛在對象：</strong>誰對哪項產品最有感？誰填了「願意試用一週」？誰與哪位夥伴聊得最投機？</p>
+                <p><strong>步驟3 跟進分配：</strong>原則「誰邀約，誰跟進」，若來賓與某夥伴特別有話聊，轉由該夥伴跟進。</p>
+                <p><strong>步驟4 確認下次行動：</strong>每位夥伴須在24小時內發送「一週體驗追蹤」第一則訊息。</p>
+            </div>
+
+            <!-- 五、抗菌產品見證故事範本 -->
+            <div class="info-card"><div class="card-title">🌟 抗菌產品見證故事範本（供見證人參考）</div>
+                <p><strong>故事一：抗菌襪</strong><br>「我以前不敢在朋友家脫鞋。我的腳很容易出汗，穿一般棉襪到下午就有味道。朋友送我三雙抗菌襪，說穿一週就知道。第一天回家脫下來聞——真的沒味道。我不信，連續穿三天，都一樣。現在我全部換成抗菌襪。終於可以大方脫鞋了。」</p>
+                <p><strong>故事二：抗菌內衣</strong><br>「我每週健身三次，運動完內衣都濕透。穿久了有一種洗不掉的悶味，原來是細菌卡在纖維裡。換了抗菌內衣之後，運動完汗水蒸發很快，晾乾完全沒異味。穿一整天也不會悶癢。原來不是我的問題，是材質的問題。」</p>
+                <p><strong>故事三：抗菌口罩</strong><br>「我以前討厭戴口罩——戴久了內側濕掉、有口水味，臉還會悶出痘痘。換了抗菌口罩，材質薄但很密，不會貼嘴巴。戴一整天拿下來，內側還是乾的，也沒有用過的味道。現在包包裡隨時放兩個，一個自用，一個給朋友。」</p>
+            </div>
+
+            <!-- 六、一週體驗追蹤對話腳本 -->
+            <div class="info-card"><div class="card-title">📲 一週體驗追蹤對話腳本</div>
+                <p><strong>針對：護椎體雕衣／防駝衣</strong><br>第1天（晚上）：「ＸＸ，今天第一天穿護椎體雕衣。第一天可能會覺得背後有存在感，那是正常的。明天再跟我說感覺，晚安～」<br>第3天：「ＸＸ，穿了三天，身體應該比較習慣了。這三天哪個時候你覺得最有感？比如彎腰洗頭、上班久坐？一句話就好😊」<br>第5天：「ＸＸ，如果你現在脫掉，再做一次彎腰或久坐，感覺跟穿的時候有什麼不一樣？很多朋友說『脫掉反而覺得空空的』。」<br>第7天：「ＸＸ，一週結束了！不管要不要繼續穿，都謝謝你。你只需要回答：『這一週，你的腰／背有沒有比以前輕鬆？』有的話我們聊怎麼留下，沒有的話我幫你調整。等你訊息～」</p>
+                <p><strong>針對：抗菌襪</strong><br>第1天：「ＸＸ，今天開始穿抗菌襪。正常穿一整天，晚上脫下來可以好奇聞一下（笑）。明天跟我說結果～」<br>第3天：「ＸＸ，穿了三天，你覺得跟一般襪子最大的差別是什麼？味道、乾爽度、還是舒適感？一句話就好～」<br>第5天：「ＸＸ，今天有沒有去需要脫鞋的地方？比如朋友家、健身房？如果有，你當時會在意腳的味道嗎？」<br>第7天：「ＸＸ，一週結束了！我只問你：『這雙抗菌襪有沒有解決你原本在意的問題？』如果有的話你希望繼續穿幾雙？沒有的話也直接跟我說，沒關係的。」</p>
+            </div>
+
+            <!-- 七、常見錯誤與對策一覽表 -->
+            <div class="info-card"><div class="card-title">⚠️ 常見錯誤與對策一覽表</div>
+                <ul class="bullet-list"><li>只示範脊椎，忽略手腕／膝蓋 → 至少示範2種不同部位</li><li>抗菌產品無法當場感受 → 用觸摸材質＋見證故事補足</li><li>來賓不知從何試起 → 主持人引導：「哪裡最不舒服，就先試哪裡」</li><li>主講超過30分鐘 → 每10分鐘換互動（試穿、問答）</li><li>會後馬上推銷 → 只問「今天哪個部分讓你最有感覺？」</li><li>見證人講太專業 → 只能用日常用語（彎腰、轉頭、脫鞋）</li><li>忽略男性來賓 → 準備男用款，由男性夥伴協助</li></ul>
+            </div>
+
+            <!-- 八、身體感受回饋卡（分段排版） -->
+            <div class="info-card"><div class="card-title">📄 附件：身體感受回饋卡</div>
+                <div class="feedback-card">
+                    <p><strong>【BZD × 希望之星團隊】身體感受回饋卡</strong></p>
+                    <p>姓名（可不填）：_______________</p>
+                    <div class="section-subtitle">🔹 今天哪個產品讓你最有感覺？（可複選）</div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item"><input type="checkbox"> 護椎體雕衣</div>
+                        <div class="checkbox-item"><input type="checkbox"> 防駝衣</div>
+                        <div class="checkbox-item"><input type="checkbox"> 護頸</div>
+                        <div class="checkbox-item"><input type="checkbox"> 護腕</div>
+                        <div class="checkbox-item"><input type="checkbox"> 護腰</div>
+                        <div class="checkbox-item"><input type="checkbox"> 護膝</div>
+                        <div class="checkbox-item"><input type="checkbox"> 眼罩</div>
+                        <div class="checkbox-item"><input type="checkbox"> 抗菌內衣</div>
+                        <div class="checkbox-item"><input type="checkbox"> 抗菌內褲</div>
+                        <div class="checkbox-item"><input type="checkbox"> 抗菌襪品</div>
+                        <div class="checkbox-item"><input type="checkbox"> 抗菌口罩</div>
+                    </div>
+                    <div class="section-subtitle">📊 試穿／試戴後，你的不舒服感減少了約 ______%</div>
+                    <div class="section-subtitle">✅ 你是否願意帶一件產品回家使用，照顧自己的身體？</div>
+                    <div class="checkbox-item"><input type="radio" name="intent"> 願意（請勾選你最想試的產品：_________________）</div>
+                    <div class="checkbox-item"><input type="radio" name="intent"> 考慮中</div>
+                    <div class="checkbox-item"><input type="radio" name="intent"> 暫時不需要</div>
+                    <div style="margin-top: 1rem;"><em>其他想說的話：_________________________________</em></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模組5：組織運作與團隊管理 -->
+    <div id="module5" class="module-accordion">
+        <div class="module-header"><h2>🤝 第五階段：組織運作與團隊管理</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <div class="card-grid">
+                <div class="info-card"><div class="card-title">🌟 組織團隊運作技巧</div><ul class="bullet-list"><li>融入（注意不融入的人）</li><li>溝通（合作內容）讓對方清楚知道對方想要的，協助對方得到</li><li>自我檢討（從中發現誰能栽培，誰是人才）</li><li>在團體中找到適當的位置，找到存在價值</li><li>重複的練習 ⇒ 不斷的鼓勵 & 讚美</li></ul></div>
+                <div class="info-card"><div class="card-title">📊 希望之星團隊考核辦法（高階標準）</div><p><strong>維持區代資格</strong><br>1. 每個月需達到責任額 1 萬元。<br>2. 三個月期間需符合出貨額要求：三個月中至少有一個月需達到 9 萬元出貨額。<br>　例：前兩個月出貨各 1 萬，則第三個月需出貨 9 萬。<br>3. 若三個月都沒有出貨，將會被降回代理資格。</p><p><strong>維持代理資格</strong><br>半年期間需出貨總額達到 10 萬元。</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模組6：實戰作業與演練清單 -->
+    <div id="module6" class="module-accordion">
+        <div class="module-header"><h2>📌 附：實戰作業與演練清單</h2><span class="toggle-icon">▼</span></div>
+        <div class="module-body">
+            <ul class="bullet-list"><li>列出40個新朋友名單</li><li>邀約參加公司講座名單20人</li><li>開發締結一位新試賣夥伴</li><li>操作家庭聚會（聚會人數、任務分工、聚會成績），先做紀錄</li><li>完成蓓姿媞產品開箱話術及演練</li><li>撰寫並分享「我與蓓姿媞的故事」</li></ul>
+            <div class="insight-block">🎯 行動提醒：不斷學習 + 行動力，從名單到聚會，跟進再到組織複製，每一個練習都帶來成長。跟著希望之星團隊，共創健康與財富自由！</div>
+        </div>
+    </div>
+
+    <div class="footer"><p>蓓姿媞 × 希望之星團隊 — 完整教育訓練教材 v3｜可展開學習區塊｜藍綠配色 · 極簡閱讀排版</p></div>
+</div>
+<script>
+    document.querySelectorAll('.module-accordion').forEach(acc => {
+        const header = acc.querySelector('.module-header');
+        const body = acc.querySelector('.module-body');
+        const icon = header.querySelector('.toggle-icon');
+        body.style.display = 'block';
+        header.addEventListener('click', () => {
+            if (body.style.display === 'none') { body.style.display = 'block'; icon.textContent = '▼'; }
+            else { body.style.display = 'none'; icon.textContent = '▶'; }
+        });
+    });
+    document.querySelectorAll('.seven-item').forEach(item => {
+        const btn = item.querySelector('.seven-header');
+        const detail = item.querySelector('.seven-detail');
+        const arrow = btn.querySelector('.seven-arrow');
+        if(detail) { detail.style.display = 'none';
+        btn.addEventListener('click', () => {
+            if (detail.style.display === 'none') { detail.style.display = 'block'; arrow.textContent = '▲'; }
+            else { detail.style.display = 'none'; arrow.textContent = '▼'; }
+        });}
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const target = document.getElementById(link.getAttribute('data-target'));
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+</body>
+</html>
